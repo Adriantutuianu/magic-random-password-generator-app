@@ -94,6 +94,13 @@ function getPasswordOptions() {
   var uppercase = confirm("Click OK if you want to include uppercase.");
   var numeric = confirm("Click OK if you want to include numbers.");
   var specChar = confirm("Click OK if you want to include special characters.");
+
+  return {
+    lowerCaseValue: lowercase,
+    upperCaseValue: uppercase,
+    numericValue: numeric,
+    specCharValue: specChar,
+  };
 }
 
 console.log(getPasswordOptions());
