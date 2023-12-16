@@ -134,6 +134,12 @@ function generatePassword() {
     password.push(...randomNumericValue);
   }
 
+  // functionality to generate 8 random special characters from array
+
+  if (passOptions.specCharValue) {
+    var randomSpecChar = getRandom(specialCharacters, 8);
+    password.push(...randomSpecChar);
+  }
   console.log(" Password", password);
 
   // var specialCharactersRandom = getRandom(specialCharacters);
