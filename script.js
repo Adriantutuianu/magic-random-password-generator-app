@@ -118,9 +118,16 @@ function generatePassword() {
   var password = [];
   // functionality to generate 8 random characters from lowercase array
   if (passOptions.lowerCaseValue) {
-    var randomLowercase = getRandom(lowerCasedCharacters, 8);
-    password.push(...randomLowercase);
+    var randomLowerCase = getRandom(lowerCasedCharacters, 8);
+    password.push(...randomLowerCase);
   }
+
+  // functionality to generate 8 random characters from uppercase array
+  if (passOptions.upperCaseValue) {
+    var randomUpperCase = getRandom(upperCasedCharacters, 8);
+    password.push(...randomUpperCase);
+  }
+
   console.log(" Password", password);
 
   // var upperCaseRandom = getRandom(upperCasedCharacters);
