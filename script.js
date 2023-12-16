@@ -140,10 +140,12 @@ function generatePassword() {
     var randomSpecChar = getRandom(specialCharacters, 8);
     password.push(...randomSpecChar);
   }
+  //
   console.log(" Password", password);
-
-  // var specialCharactersRandom = getRandom(specialCharacters);
-  // var numericCharactersRandom = getRandom(numericCharacters);
+  //
+  // Transformed array into string using join method
+  var passwordString = password.join("");
+  return passwordString;
 }
 
 // Get references to the #generate element
