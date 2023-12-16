@@ -103,13 +103,14 @@ function getPasswordOptions() {
   };
 }
 
-console.log(getPasswordOptions());
-
 // Function for getting a random element from an array
 function getRandom(arr) {}
 
 // Function to generate password with user input
-function generatePassword() {}
+function generatePassword() {
+  var passOptions = getPasswordOptions();
+  console.log(passOptions);
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
