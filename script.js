@@ -128,9 +128,14 @@ function generatePassword() {
     password.push(...randomUpperCase);
   }
 
+  //functionality to generate 8 random characters from numeric array
+  if (passOptions.numericValue) {
+    var randomNumericValue = getRandom(numericCharacters, 8);
+    password.push(...randomNumericValue);
+  }
+
   console.log(" Password", password);
 
-  // var upperCaseRandom = getRandom(upperCasedCharacters);
   // var specialCharactersRandom = getRandom(specialCharacters);
   // var numericCharactersRandom = getRandom(numericCharacters);
 }
