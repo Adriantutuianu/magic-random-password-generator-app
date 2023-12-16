@@ -104,16 +104,28 @@ function getPasswordOptions() {
 }
 
 // Function for getting a random element from an array
-function getRandom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)]; //getting random number from arr
-}
+function getRandom(arr, num) {
+  var shuffled = [...arr].sort(() => 0.5 - Math.random());
 
-getRandom(upperCasedCharacters);
+  return shuffled.slice(0, num);
+}
 
 // Function to generate password with user input
 function generatePassword() {
   var passOptions = getPasswordOptions();
   console.log(passOptions);
+
+  var password = [];
+  // functionality to generate 8 random characters from lowercase array
+  if (passOptions.lowerCaseValue) {
+    var randomLowercase = getRandom(lowerCasedCharacters, 8);
+    password.push(...randomLowercase);
+  }
+  console.log(" Password", password);
+
+  // var upperCaseRandom = getRandom(upperCasedCharacters);
+  // var specialCharactersRandom = getRandom(specialCharacters);
+  // var numericCharactersRandom = getRandom(numericCharacters);
 }
 
 // Get references to the #generate element
