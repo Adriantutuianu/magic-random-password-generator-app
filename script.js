@@ -90,80 +90,93 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  var lowercase = confirm("Click OK if you want to include lowercase.");
-  var uppercase = confirm("Click OK if you want to include uppercase.");
-  var numeric = confirm("Click OK if you want to include numbers.");
-  var specChar = confirm("Click OK if you want to include special characters.");
+  var pwLength = prompt("Choose pw length");
+  pwLength = parseInt(pwLength);
+
+  if (pwLength < 8 || pwLength > 128 || isNaN(pwLength)) {
+    alert(
+      "Password should be between 8 and 128 characters. Please regenerate answer."
+    );
+    return;
+  }
+
+  var isLowercase = confirm("Click OK if you want to include lowercase.");
+  var isUppercase = confirm("Click OK if you want to include uppercase.");
+  var isNumeric = confirm("Click OK if you want to include numbers.");
+  var isSpecChar = confirm(
+    "Click OK if you want to include special characters."
+  );
 
   return {
-    lowerCaseValue: lowercase,
-    upperCaseValue: uppercase,
-    numericValue: numeric,
-    specCharValue: specChar,
+    pwLength,
+    lowerCaseValue: isLowercase,
+    upperCaseValue: isUppercase,
+    numericValue: isNumeric,
+    specCharValue: isSpecChar,
   };
 }
 
-// Function for getting a random element from an array
-function getRandom(arr, num) {
-  var shuffled = [...arr].sort(() => 0.5 - Math.random());
+// Function for shuffling an array
+function shuffleArray(arr) {
+  return [...arr].sort(() => 0.5 - Math.random());
+}
 
-  return shuffled.slice(0, num);
+function getRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 // Function to generate password with user input
 function generatePassword() {
   var passOptions = getPasswordOptions();
-  console.log(passOptions);
 
   var isAnyCharacterSelected = false; //check any character type is selected
 
-  var password = [];
+  var mainCharacterArray = [];
   // functionality to generate random characters from lowercase array
   if (passOptions.lowerCaseValue) {
-    var randomLowerCase = getRandom(lowerCasedCharacters);
-    password.push(...randomLowerCase);
+    var randomLowerCase = shuffleArray(lowerCasedCharacters);
+    mainCharacterArray.push(...randomLowerCase);
+    isAnyCharacterSelected = true;
   }
 
   // functionality to generate random characters from uppercase array
   if (passOptions.upperCaseValue) {
-    var randomUpperCase = getRandom(upperCasedCharacters);
-    password.push(...randomUpperCase);
+    var randomUpperCase = shuffleArray(upperCasedCharacters);
+    mainCharacterArray.push(...randomUpperCase);
+    isAnyCharacterSelected = true;
   }
 
   //functionality to generate random characters from numeric array
   if (passOptions.numericValue) {
-    var randomNumericValue = getRandom(numericCharacters);
-    password.push(...randomNumericValue);
+    var randomNumericValue = shuffleArray(numericCharacters);
+    mainCharacterArray.push(...randomNumericValue);
+    isAnyCharacterSelected = true;
   }
 
   // functionality to generate random special characters from array
 
   if (passOptions.specCharValue) {
-    var randomSpecChar = getRandom(specialCharacters);
-    password.push(...randomSpecChar);
+    var randomSpecChar = shuffleArray(specialCharacters);
+    mainCharacterArray.push(...randomSpecChar);
+    isAnyCharacterSelected = true;
   }
 
   // Check if at least one character type is selected
   if (!isAnyCharacterSelected) {
     alert("At least one character type should be selected.");
-    return "";
+    return;
   }
 
-  // Random the array strings
-  var passwordRandom = getRandom(password);
+  // mainCharacterArray = shuffleArray(mainCharacterArray);
 
-  // Transformed array into string using join method
-  var passwordRandomString = passwordRandom.join("");
+  var finalPassword = "";
 
-  // Check if the password length meet the criteria
-  if (passwordRandomString.length < 8 || passwordRandomString.length > 128) {
-    alert(
-      "Password should be between 8 and 128 characters. Please regenerate answer."
-    );
-    return "";
+  for (let i = 0; i < passOptions.pwLength; i++) {
+    var randomChar = getRandom(mainCharacterArray);
+    finalPassword += randomChar;
   }
 
-  return passwordRandomString;
+  return finalPassword;
 }
 
 // Get references to the #generate element
