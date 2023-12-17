@@ -115,6 +115,8 @@ function generatePassword() {
   var passOptions = getPasswordOptions();
   console.log(passOptions);
 
+  var isAnyCharacterSelected = false; //check any character type is selected
+
   var password = [];
   // functionality to generate 8 random characters from lowercase array
   if (passOptions.lowerCaseValue) {
@@ -141,9 +143,11 @@ function generatePassword() {
     password.push(...randomSpecChar);
   }
 
-  // if (password.length < 8 && password.length > 128) {
-  //   alert("Password should be between 8 and 128 characters.");
-  // }
+  // Check if at least one character type is selected
+  if (!isAnyCharacterSelected) {
+    alert("At least one character type should be selected.");
+    return "";
+  }
 
   // Random the array strings
   var passwordRandom = getRandom(password);
