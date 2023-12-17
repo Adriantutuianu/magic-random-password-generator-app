@@ -118,25 +118,25 @@ function generatePassword() {
   var isAnyCharacterSelected = false; //check any character type is selected
 
   var password = [];
-  // functionality to generate 8 random characters from lowercase array
+  // functionality to generate random characters from lowercase array
   if (passOptions.lowerCaseValue) {
     var randomLowerCase = getRandom(lowerCasedCharacters);
     password.push(...randomLowerCase);
   }
 
-  // functionality to generate 8 random characters from uppercase array
+  // functionality to generate random characters from uppercase array
   if (passOptions.upperCaseValue) {
     var randomUpperCase = getRandom(upperCasedCharacters);
     password.push(...randomUpperCase);
   }
 
-  //functionality to generate 8 random characters from numeric array
+  //functionality to generate random characters from numeric array
   if (passOptions.numericValue) {
     var randomNumericValue = getRandom(numericCharacters);
     password.push(...randomNumericValue);
   }
 
-  // functionality to generate 8 random special characters from array
+  // functionality to generate random special characters from array
 
   if (passOptions.specCharValue) {
     var randomSpecChar = getRandom(specialCharacters);
@@ -157,7 +157,9 @@ function generatePassword() {
 
   // Check if the password length meet the criteria
   if (passwordRandomString.length < 8 || passwordRandomString.length > 128) {
-    alert("Password should be between 8 and 128 characters.");
+    alert(
+      "Password should be between 8 and 128 characters. Please regenerate answer."
+    );
     return "";
   }
 
