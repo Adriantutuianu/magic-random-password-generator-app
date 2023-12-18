@@ -90,10 +90,10 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  var pwLength = prompt("Choose pw length");
-  pwLength = parseInt(pwLength);
+  var passwordLength = prompt("Choose password length");
+  passwordLength = parseInt(passwordLength);
 
-  if (pwLength < 8 || pwLength > 128 || isNaN(pwLength)) {
+  if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
     alert(
       "Password should be between 8 and 128 characters. Please regenerate answer."
     );
@@ -108,7 +108,7 @@ function getPasswordOptions() {
   );
 
   return {
-    pwLength,
+    passwordLength,
     lowerCaseValue: isLowercase,
     upperCaseValue: isUppercase,
     numericValue: isNumeric,
@@ -129,9 +129,15 @@ function getRandom(arr) {
 function generatePassword() {
   var passOptions = getPasswordOptions();
 
+  // Check if getPasswordOptions returned a valid value
+  if (!passOptions) {
+    return; // Exit the function if no valid options are provided
+  }
+
   var isAnyCharacterSelected = false; //check any character type is selected
 
   var mainCharacterArray = [];
+
   // functionality to generate random characters from lowercase array
   if (passOptions.lowerCaseValue) {
     var randomLowerCase = shuffleArray(lowerCasedCharacters);
@@ -171,7 +177,7 @@ function generatePassword() {
 
   var finalPassword = "";
 
-  for (let i = 0; i < passOptions.pwLength; i++) {
+  for (let i = 0; i < passOptions.passwordLength; i++) {
     var randomChar = getRandom(mainCharacterArray);
     finalPassword += randomChar;
   }
